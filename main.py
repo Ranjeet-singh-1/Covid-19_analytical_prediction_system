@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import seaborn as sns
 import plotly.express as px
+
 # ---------------------------------Reading the data from csv files with pandas-----------------
 
 Data = pd.read_csv("covid_19_india.csv")
@@ -214,41 +215,107 @@ elif inp == 2:
         print("---------!!!!!WRONG INPUT ------")
 elif inp == 3:
     print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-    print("   1 : India's trend for  ACTIVE cases ")
-    print("   2 : India's trend for  RECOVERED cases ")
-    print("   3 : India's trend for DEATHS cases ")
+    print("   1 : Top-5 States trend for  ACTIVE cases ")
+    print("   2 : Top-5 States  trend for  RECOVERED cases ")
+    print("   3 : Top-5 States  trend for DEATHS cases ")
     inp2 = int(input("\n Enter your option : "))
     if inp2 == 1:
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
+        print("1-For normal Graphs")
+        print("2-For Graphs")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            kerla_data = Data[Data["State/UnionTerritory"][:] == "Kerala"]
+            Maharashtra_data = Data[Data["State/UnionTerritory"][:] == "Maharashtra"]
+            Karnataka_data = Data[Data["State/UnionTerritory"][:] == "Karnataka"]
+            TamilNadu_data = Data[Data["State/UnionTerritory"][:] == "Tamil Nadu"]
+            UttarPradesh_data = Data[Data["State/UnionTerritory"][:] == "Uttar Pradesh"]
+            plt.figure(figsize=(12, 6))
+            plt.title("Active cases trend of top-5 State/UnionTerritory", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Active cases ", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(kerla_data["Date"], kerla_data["Active"], label="kerla", linewidth=3)
+            plt.plot(Maharashtra_data["Date"], Maharashtra_data["Active"], label="Maharashtra", linewidth=3)
+            plt.plot(Karnataka_data["Date"], Karnataka_data["Active"], label="Karnataka", linewidth=3)
+            plt.plot(TamilNadu_data["Date"], TamilNadu_data["Active"], label="TamilNadu", linewidth=3)
+            plt.plot(UttarPradesh_data["Date"], UttarPradesh_data["Active"], label="Uttar Pradesh", linewidth=3)
+            plt.legend(loc="upper left", title="State/UnionTerritory", fontsize=15, shadow=True, facecolor=
+            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
         elif inp3 == 2:
-            pass
+            top_5_active = Data[
+                (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
+                        Data["State/UnionTerritory"] == "Karnataka") |
+                (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Uttar Pradesh")]
+            fig = px.line(top_5_active, x="Date", y="Active", color="State/UnionTerritory")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
     elif inp2 == 2:
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
+        print("1-For normal Graphs")
+        print("2-For Interactive Graphs")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            kerla_data = Data[Data["State/UnionTerritory"][:] == "Kerala"]
+            Maharashtra_data = Data[Data["State/UnionTerritory"][:] == "Maharashtra"]
+            Karnataka_data = Data[Data["State/UnionTerritory"][:] == "Karnataka"]
+            TamilNadu_data = Data[Data["State/UnionTerritory"][:] == "Tamil Nadu"]
+            AndhraPradesh_data = Data[Data["State/UnionTerritory"][:] == "Andhra Pradesh"]
+            plt.figure(figsize=(12, 6))
+            plt.title("Recovered cases trend of top-5 State/UnionTerritory", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Recovered cases ", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(kerla_data["Date"], kerla_data["Recovered"], label="kerla", linewidth=3)
+            plt.plot(Maharashtra_data["Date"], Maharashtra_data["Recovered"], label="Maharashtra", linewidth=3)
+            plt.plot(Karnataka_data["Date"], Karnataka_data["Recovered"], label="Karnataka", linewidth=3)
+            plt.plot(TamilNadu_data["Date"], TamilNadu_data["Recovered"], label="TamilNadu", linewidth=3)
+            plt.plot(AndhraPradesh_data["Date"], AndhraPradesh_data["Recovered"], label="Andhra Pradesh", linewidth=3)
+            plt.legend(loc="upper left", title="State/UnionTerritory", fontsize=15, shadow=True, facecolor=
+            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
         elif inp3 == 2:
-            pass
+            top_5_recovered = Data[
+                (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
+                        Data["State/UnionTerritory"] == "Karnataka") |
+                (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Andhra Pradesh")]
+            fig = px.line(top_5_recovered, x="Date", y="Recovered", color="State/UnionTerritory")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
     elif inp2 == 3:
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
+        print("1-For normal Graphs")
+        print("2-For Interactive Graphs")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            Delhi_data = Data[Data["State/UnionTerritory"][:] == "Delhi"]
+            Maharashtra_data = Data[Data["State/UnionTerritory"][:] == "Maharashtra"]
+            Karnataka_data = Data[Data["State/UnionTerritory"][:] == "Karnataka"]
+            TamilNadu_data = Data[Data["State/UnionTerritory"][:] == "Tamil Nadu"]
+            UttarPradesh_data = Data[Data["State/UnionTerritory"][:] == "Uttar Pradesh"]
+            plt.figure(figsize=(12, 6))
+            plt.title("Deaths cases trend of top-5 State/UnionTerritory", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Deaths cases ", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(Delhi_data["Date"], Delhi_data["Deaths"], label="Delhi", linewidth=3)
+            plt.plot(Maharashtra_data["Date"], Maharashtra_data["Deaths"], label="Maharashtra", linewidth=3)
+            plt.plot(Karnataka_data["Date"], Karnataka_data["Deaths"], label="Karnataka", linewidth=3)
+            plt.plot(TamilNadu_data["Date"], TamilNadu_data["Deaths"], label="TamilNadu", linewidth=3)
+            plt.plot(UttarPradesh_data["Date"], UttarPradesh_data["Deaths"], label="Uttar Pradesh", linewidth=3)
+            plt.legend(loc="upper left", title="State/UnionTerritory", fontsize=15, shadow=True, facecolor=
+            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
         elif inp3 == 2:
-            pass
+            top_5_deaths = Data[
+                (Data["State/UnionTerritory"] == "Delhi") | (Data["State/UnionTerritory"] == "Maharashtra") | (
+                        Data["State/UnionTerritory"] == "Karnataka") |
+                (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Uttar Pradesh")]
+            fig = px.line(top_5_deaths, x="Date", y="Deaths", color="State/UnionTerritory")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
     else:
