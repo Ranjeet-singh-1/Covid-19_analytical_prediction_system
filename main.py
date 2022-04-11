@@ -39,7 +39,7 @@ for i in range(1, 560):
     Deaths.append(group_by_date["Deaths"][i] - group_by_date["Deaths"][i - 1])
 Per_day_data["Recovered"] = Recovered
 Per_day_data["Deaths"] = Deaths
-d1 = vaccine_data.groupby("State").sum()["Total Individuals Vaccinated"].reset_index().sort_values(by="State",
+d1 = vaccine_data.groupby("State").sum()["Total Individuals Vaccinated"].reset_index().sort_values(by="Total Individuals Vaccinated",
                                                                                                    ascending=False)
 d1 = d1[d1["State"] != "India"]
 # --------------------------------------Introduction Part-------------------------------
@@ -377,43 +377,68 @@ elif inp == 4:
         print("---------!!!!!WRONG INPUT ------")
 elif inp == 5:
     print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-    print("   1 : India's trend for  ACTIVE cases ")
-    print("   2 : India's trend for  RECOVERED cases ")
-    print("   3 : India's trend for DEATHS cases ")
+    print("   1 : Vaccination comparisons of all States ")
+    print("   2 : Vaccination comparisons of top-5 states  ")
     inp2 = int(input("\n Enter your option : "))
     if inp2 == 1:
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
+        print("1-For normal Pie charts")
+        print("2-For Pie  charts")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            Maharashtra = d1[d1["State"] == "Maharashtra"]["Total Individuals Vaccinated"].sum()
+            Uttar_Pradesh = d1[d1["State"] == "Uttar Pradesh"]["Total Individuals Vaccinated"].sum()
+            Rajasthan = d1[d1["State"] == "Rajasthan"]["Total Individuals Vaccinated"].sum()
+            Gujarat = d1[d1["State"] == "Gujarat"]["Total Individuals Vaccinated"].sum()
+            West_Bengal = d1[d1["State"] == "West Bengal"]["Total Individuals Vaccinated"].sum()
+            other = d1[(d1["State"] != "Maharashtra") & (d1["State"] != "Rajasthan") & (d1["State"] != "Uttar Pradesh")
+                       & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
+                "Total Individuals Vaccinated"].sum()
+            plt.figure(figsize=(10, 10))
+            plt.title("Comarision of vaccination among different states", size=20, color="darkblue")
+            plt.pie(x=[Maharashtra, Uttar_Pradesh, Rajasthan, Gujarat, West_Bengal, other],
+                    labels=["Maharashtra", "Uttar_Pradesh", "Rajasthan", "Gujarat", "West_Bengal", "other"]
+                    , shadow=True, wedgeprops={'edgecolor': 'black', 'linewidth': 1}, explode=[0, 0, 0, 0, 0, 0.1],
+                    autopct="%1.1f%%", textprops={"fontsize": 14})
+            plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
+            plt.show()
         elif inp3 == 2:
-            pass
+            d2 = d1[:5]
+            other = d1[(d1["State"] != "Maharashtra") & (d1["State"] != "Rajasthan") & (d1["State"] != "Uttar Pradesh")
+                       & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
+                "Total Individuals Vaccinated"].sum()
+            value = {"State": "other", "Total Individuals Vaccinated": other}
+            d3 = pd.DataFrame(value, index=[0])
+            d2 = pd.concat([d2, d3], ignore_index=True)
+            fig = px.pie(d2[:6], values="Total Individuals Vaccinated", names="State")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
     elif inp2 == 2:
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
+        print("1-For normal PIE charts")
+        print("2-For Interactive PIE charts")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            Maharashtra = d1[d1["State"] == "Maharashtra"]["Total Individuals Vaccinated"].sum()
+            Uttar_Pradesh = d1[d1["State"] == "Uttar Pradesh"]["Total Individuals Vaccinated"].sum()
+            Rajasthan = d1[d1["State"] == "Rajasthan"]["Total Individuals Vaccinated"].sum()
+            Gujarat = d1[d1["State"] == "Gujarat"]["Total Individuals Vaccinated"].sum()
+            West_Bengal = d1[d1["State"] == "West Bengal"]["Total Individuals Vaccinated"].sum()
+            plt.figure(figsize=(10, 10))
+            plt.title("Comarision of vaccination among top vaccinated statesstates", size=20, color="darkblue")
+            plt.pie(x=[Maharashtra, Uttar_Pradesh, Rajasthan, Gujarat, West_Bengal],
+                    labels=["Maharashtra", "Uttar_Pradesh", "Rajasthan", "Gujarat", "West_Bengal"]
+                    , shadow=True, wedgeprops={'edgecolor': 'black', 'linewidth': 1}, explode=[0.1, 0, 0, 0, 0],
+                    autopct="%1.1f%%", textprops={"fontsize": 14}, startangle=-20)
+            plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
+            plt.show()
         elif inp3 == 2:
-            pass
+            fig = px.pie(d1[:5], values="Total Individuals Vaccinated", names="State")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
-    elif inp2 == 3:
-        print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
-        inp3 = int(input("Enter your choice : "))
-        if inp3 == 1:
-            pass
-        elif inp3 == 2:
-            pass
-        else:
-            print("---------!!!!!WRONG INPUT ------")
+
     else:
         print("---------!!!!!WRONG INPUT ------")
 else:
