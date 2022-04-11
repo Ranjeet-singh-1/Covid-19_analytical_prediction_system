@@ -74,7 +74,7 @@ while True:
                             edgecolor="black")
                 plt.show()
             elif inp3 == 2:
-                fig = px.bar(top_10_active_states[:10], x="State/UnionTerritory", y="Active", color="State/UnionTerritory")
+                fig = px.bar(top_10_active_states[:10], x="State/UnionTerritory", y="Active", color="State/UnionTerritory",title="Top 10 states with most active cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -100,7 +100,7 @@ while True:
                 plt.show()
             elif inp3 == 2:
                 fig = px.bar(top_10_confirmed_states[:10], x="State/UnionTerritory", y="Confirmed",
-                             color="State/UnionTerritory")
+                             color="State/UnionTerritory", title="Top 10 states with most Confirmed cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -126,7 +126,7 @@ while True:
                             edgecolor="black")
                 plt.show()
             elif inp3 == 2:
-                fig = px.bar(top_10_deaths_states[:10], x="State/UnionTerritory", y="Deaths", color="State/UnionTerritory")
+                fig = px.bar(top_10_deaths_states[:10], x="State/UnionTerritory", y="Deaths", color="State/UnionTerritory", title="Top 10 states with most Deaths cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -152,7 +152,7 @@ while True:
                 plt.show()
             elif inp3 == 2:
                 fig = px.bar(top_10_recovered_states[:10], x="State/UnionTerritory", y="Recovered",
-                             color="State/UnionTerritory")
+                             color="State/UnionTerritory", title="Top 10 states with most Recovered cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -171,7 +171,7 @@ while True:
             inp3 = int(input("Enter your choice : "))
             if inp3 == 1:
                 plt.figure(figsize=(12, 6))
-                plt.title("Active cases trend", size=20, color="darkblue")
+                plt.title("Active cases trend in India ", size=20, color="darkblue")
                 plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
                 plt.ylabel("Active cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
                 plt.plot(Per_day_data["Date"], Per_day_data["Active"], color="orange", linewidth=3, label="India")
@@ -180,7 +180,7 @@ while True:
                 plt.grid()
                 plt.show()
             elif inp3 == 2:
-                fig = px.line(Per_day_data, x="Date", y="Active")
+                fig = px.line(Per_day_data, x="Date", y="Active", title="Active cases trend India ")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -191,7 +191,7 @@ while True:
             inp3 = int(input("Enter your choice : "))
             if inp3 == 1:
                 plt.figure(figsize=(12, 6))
-                plt.title("Recovered cases trend", size=20, color="darkblue")
+                plt.title("Recovered cases trend in India", size=20, color="darkblue")
                 plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
                 plt.ylabel("Recovered cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
                 plt.plot(Per_day_data["Date"], Per_day_data["Recovered"], color="orange", linewidth=3, label="India")
@@ -200,7 +200,7 @@ while True:
                 plt.grid()
                 plt.show()
             elif inp3 == 2:
-                fig = px.line(Per_day_data, x="Date", y="Recovered")
+                fig = px.line(Per_day_data, x="Date", y="Recovered", title="Recovered cases trend India ")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -211,7 +211,7 @@ while True:
             inp3 = int(input("Enter your choice : "))
             if inp3 == 1:
                 plt.figure(figsize=(12, 6))
-                plt.title("Deaths cases trend", size=20, color="darkblue")
+                plt.title("Deaths cases trend in India ", size=20, color="darkblue")
                 plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
                 plt.ylabel("Deaths cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
                 plt.plot(Per_day_data["Date"], Per_day_data["Deaths"], color="darkorange", linewidth=3, label="India")
@@ -220,7 +220,7 @@ while True:
                 plt.grid()
                 plt.show()
             elif inp3 == 2:
-                fig = px.line(Per_day_data, x="Date", y="Deaths")
+                fig = px.line(Per_day_data, x="Date", y="Deaths", title="Deaths cases trend India ")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -261,7 +261,7 @@ while True:
                     (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
                     (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Uttar Pradesh")]
-                fig = px.line(top_5_active, x="Date", y="Active", color="State/UnionTerritory")
+                fig = px.line(top_5_active, x="Date", y="Active", color="State/UnionTerritory", title="Active cases trend of top-5 State/UnionTerritory")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -294,7 +294,7 @@ while True:
                     (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
                     (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Andhra Pradesh")]
-                fig = px.line(top_5_recovered, x="Date", y="Recovered", color="State/UnionTerritory")
+                fig = px.line(top_5_recovered, x="Date", y="Recovered", color="State/UnionTerritory", title="Recovered cases trend of top-5 State/UnionTerritory")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -327,7 +327,7 @@ while True:
                     (Data["State/UnionTerritory"] == "Delhi") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
                     (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Uttar Pradesh")]
-                fig = px.line(top_5_deaths, x="Date", y="Deaths", color="State/UnionTerritory")
+                fig = px.line(top_5_deaths, x="Date", y="Deaths", color="State/UnionTerritory", title="Deaths cases trend of top-5 State/UnionTerritory")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -395,7 +395,7 @@ while True:
                            & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
                     "Total Individuals Vaccinated"].sum()
                 plt.figure(figsize=(10, 10))
-                plt.title("Comarision of vaccination among different states", size=20, color="darkblue")
+                plt.title("Comarision of vaccination among all  different states", size=20, color="darkblue")
                 plt.pie(x=[Maharashtra, Uttar_Pradesh, Rajasthan, Gujarat, West_Bengal, other],
                         labels=["Maharashtra", "Uttar_Pradesh", "Rajasthan", "Gujarat", "West_Bengal", "other"]
                         , shadow=True, wedgeprops={'edgecolor': 'black', 'linewidth': 1}, explode=[0, 0, 0, 0, 0, 0.1],
@@ -410,7 +410,7 @@ while True:
                 value = {"State": "other", "Total Individuals Vaccinated": other}
                 d3 = pd.DataFrame(value, index=[0])
                 d2 = pd.concat([d2, d3], ignore_index=True)
-                fig = px.pie(d2[:6], values="Total Individuals Vaccinated", names="State")
+                fig = px.pie(d2[:6], values="Total Individuals Vaccinated", names="State", title="Comarision of vaccination among all different states")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -426,7 +426,7 @@ while True:
                 Gujarat = d1[d1["State"] == "Gujarat"]["Total Individuals Vaccinated"].sum()
                 West_Bengal = d1[d1["State"] == "West Bengal"]["Total Individuals Vaccinated"].sum()
                 plt.figure(figsize=(10, 10))
-                plt.title("Comarision of vaccination among top vaccinated statesstates", size=20, color="darkblue")
+                plt.title("Comarision of vaccination among top-5 vaccinated statesstates", size=20, color="darkblue")
                 plt.pie(x=[Maharashtra, Uttar_Pradesh, Rajasthan, Gujarat, West_Bengal],
                         labels=["Maharashtra", "Uttar_Pradesh", "Rajasthan", "Gujarat", "West_Bengal"]
                         , shadow=True, wedgeprops={'edgecolor': 'black', 'linewidth': 1}, explode=[0.1, 0, 0, 0, 0],
@@ -434,7 +434,7 @@ while True:
                 plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
                 plt.show()
             elif inp3 == 2:
-                fig = px.pie(d1[:5], values="Total Individuals Vaccinated", names="State")
+                fig = px.pie(d1[:5], values="Total Individuals Vaccinated", names="State", title="Comarision of vaccination among top-5 states")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
