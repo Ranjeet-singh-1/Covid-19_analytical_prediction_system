@@ -152,13 +152,22 @@ elif inp == 2:
     inp2 = int(input("\n Enter your option : "))
     if inp2 == 1:
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
+        print("1-For normal Graphs")
+        print("2-For Interactive Graphs")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            plt.figure(figsize=(12, 6))
+            plt.title("Active cases trend", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Active cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(Per_day_data["Date"], Per_day_data["Active"], color="orange", linewidth=3, label="India")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
         elif inp3 == 2:
-            pass
+            fig = px.line(Per_day_data, x="Date", y="Active")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
     elif inp2 == 2:
@@ -167,9 +176,18 @@ elif inp == 2:
         print("2-For Interactive Bar charts")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            plt.figure(figsize=(12, 6))
+            plt.title("Recovered cases trend", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Recovered cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(Per_day_data["Date"], Per_day_data["Recovered"], color="orange", linewidth=3, label="India")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
         elif inp3 == 2:
-            pass
+            fig = px.line(Per_day_data, x="Date", y="Recovered")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
     elif inp2 == 3:
@@ -178,9 +196,18 @@ elif inp == 2:
         print("2-For Interactive Bar charts")
         inp3 = int(input("Enter your choice : "))
         if inp3 == 1:
-            pass
+            plt.figure(figsize=(12, 6))
+            plt.title("Deaths cases trend", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Deaths cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(Per_day_data["Date"], Per_day_data["Deaths"], color="darkorange", linewidth=3, label="India")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
         elif inp3 == 2:
-            pass
+            fig = px.line(Per_day_data, x="Date", y="Deaths")
+            fig.show()
         else:
             print("---------!!!!!WRONG INPUT ------")
     else:
