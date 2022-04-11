@@ -9,7 +9,9 @@ import plotly.express as px
 
 # ---------------------------------Reading the data from csv files with pandas-----------------
 
-Data = pd.read_csv("covid_19_india.csv")
+Data = pd.read_csv("covid_19_india.csv")  # Main Data
+
+vaccine_data = pd.read_csv("covid_vaccine_statewise.csv")
 
 # -------------------------------- Data Pre-processing: remove,add,change---------------
 
@@ -17,6 +19,14 @@ Data.drop(["Sno", "Time", "ConfirmedIndianNational", "ConfirmedForeignNational"]
 Data["Date"] = pd.to_datetime(Data["Date"])  # type casting
 Data.rename(columns={"Cured": "Recovered"}, inplace=True)  # renaming
 Data["Active"] = Data["Confirmed"] - (Data["Recovered"] + Data["Deaths"])  # adding new columns
+
+vaccine_data.drop(
+    columns=["Sessions", "18-44 Years (Doses Administered)", "Male (Doses Administered)", "Female (Doses Administered)",
+             "Transgender (Doses Administered)",
+             "18-44 Years (Doses Administered)", "45-60 Years (Doses Administered)", "Sputnik V (Doses Administered)",
+             "AEFI",
+             "60+ Years (Doses Administered)"], inplace=True)
+vaccine_data.rename(columns={"Updated On": "Vaccine date"}, inplace=True)
 
 # ---------------------------------Adding more required dataframes----------------------
 
@@ -29,6 +39,9 @@ for i in range(1, 560):
     Deaths.append(group_by_date["Deaths"][i] - group_by_date["Deaths"][i - 1])
 Per_day_data["Recovered"] = Recovered
 Per_day_data["Deaths"] = Deaths
+d1 = vaccine_data.groupby("State").sum()["Total Individuals Vaccinated"].reset_index().sort_values(by="State",
+                                                                                                   ascending=False)
+d1 = d1[d1["State"] != "India"]
 # --------------------------------------Introduction Part-------------------------------
 
 print("-------------------    WELCOME TO COVID-19 ANALYTICAL AND DETAILS PREDICTION SYSTEM     -----------------\n")
@@ -37,8 +50,8 @@ print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
 print("   1 : Plotting top 10 states having most  cases ")
 print("   2 : Plotting India's covid-19 cases trend ")
 print("   3 : Plotting combinely top-5 states cases trend ")
-print("   4 : Vaccination comparisions ")
-print("   5 : Vaccinations comparisions ")
+print("   4 : Vaccination comparisons Individually")
+print("   5 : Vaccinations comparisons of States ")
 inp = int(input(" Enter your option : "))
 if inp == 1:
     print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
@@ -322,43 +335,44 @@ elif inp == 3:
         print("---------!!!!!WRONG INPUT ------")
 elif inp == 4:
     print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-    print("   1 : India's trend for  ACTIVE cases ")
-    print("   2 : India's trend for  RECOVERED cases ")
-    print("   3 : India's trend for DEATHS cases ")
+    print("   1 : Vaccination comparisons of different age groups ")
+    print("   2 : Vaccination comparisons by gender ")
+    print("   3 : Vaccination comparisons Between covishield and covaxin ")
     inp2 = int(input("\n Enter your option : "))
     if inp2 == 1:
-        print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
-        inp3 = int(input("Enter your choice : "))
-        if inp3 == 1:
-            pass
-        elif inp3 == 2:
-            pass
-        else:
-            print("---------!!!!!WRONG INPUT ------")
+        age_18_44 = vaccine_data["18-44 Years(Individuals Vaccinated)"].sum()
+        age_45_60 = vaccine_data["45-60 Years(Individuals Vaccinated)"].sum()
+        age_60_more = vaccine_data["60+ Years(Individuals Vaccinated)"].sum()
+        plt.figure(figsize=(12, 6))
+        plt.title("Diiferent ages vaccination camparision", size=20, color="darkblue")
+        plt.pie(x=[age_18_44, age_45_60, age_60_more], labels=["age_18_44", "age_45_60", "age_60_more"], shadow=True,
+                wedgeprops={'edgecolor': 'black', 'linewidth': 1}, colors=["lightgreen", "lightblue", "orange"],
+                explode=[0.033, 0.033, 0.033], autopct="%1.1f%%")
+        plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
+        plt.show()
+
     elif inp2 == 2:
-        print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
-        inp3 = int(input("Enter your choice : "))
-        if inp3 == 1:
-            pass
-        elif inp3 == 2:
-            pass
-        else:
-            print("---------!!!!!WRONG INPUT ------")
+        male = vaccine_data["Male(Individuals Vaccinated)"].sum()
+        female = vaccine_data["Female(Individuals Vaccinated)"].sum()
+        plt.figure(figsize=(12, 6))
+        plt.title("comarision of vaccination between male and female", size=20, color="darkblue")
+        plt.pie(x=[male, female], labels=["Male", "female"], shadow=True,
+                wedgeprops={'edgecolor': 'black', 'linewidth': 1}, colors=["lightgreen", "lightblue"],
+                explode=[0, 0.06], autopct="%1.1f%%")
+        plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
+        plt.show()
+
     elif inp2 == 3:
-        print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
-        print("1-For normal Bar charts")
-        print("2-For Interactive Bar charts")
-        inp3 = int(input("Enter your choice : "))
-        if inp3 == 1:
-            pass
-        elif inp3 == 2:
-            pass
-        else:
-            print("---------!!!!!WRONG INPUT ------")
+        Covaxin = vaccine_data[" Covaxin (Doses Administered)"].sum()
+        CoviShield = vaccine_data["CoviShield (Doses Administered)"].sum()
+        plt.figure(figsize=(12, 6))
+        plt.title("comarision of vaccination between male and female", size=20, color="darkblue")
+        plt.pie(x=[Covaxin, CoviShield], labels=["Covaxin", "CoviShield"], shadow=True,
+                wedgeprops={'edgecolor': 'black', 'linewidth': 1}, colors=["lightgreen", "lightblue"],
+                explode=[0, 0.06], autopct="%1.1f%%")
+        plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
+        plt.show()
+
     else:
         print("---------!!!!!WRONG INPUT ------")
 elif inp == 5:
