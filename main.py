@@ -52,33 +52,33 @@ while True:
     print("   3 : Plotting combinely top-5 states cases trend ")
     print("   4 : Vaccination comparisons Individually")
     print("   5 : Vaccinations comparisons of States ")
-    inp = int(input(" Enter your option : "))
-    if inp == 1:
+    inp = input(" Enter your option : ")
+    if inp == "1":
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
         print("   1 : Plotting top 10 states having most ACTIVE cases ")
         print("   2 : Plotting top 10 states having most CONFIRMED cases ")
         print("   3 : Plotting top 10 states having most DEATHS cases ")
         print("   4 : Plotting top 10 states having most RECOVERED cases ")
-        inp2 = int(input("\n Enter your option : "))
-        if inp2 == 1:
+        inp2 = input("\n Enter your option : ")
+        if inp2 == "1":
             top_10_active_states = Data.groupby("State/UnionTerritory").max()[['Active']].sort_values(by=["Active"],
                                                                                                       ascending=False).reset_index()
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Bar charts")
             print("2-For Interactive Bar charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 plt.figure(figsize=(12, 6))
                 plt.title("Top 10 states with most active cases", size=20)
                 sns.barplot(x="State/UnionTerritory", y="Active", data=top_10_active_states[:10], linewidth=1,
                             edgecolor="black")
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.bar(top_10_active_states[:10], x="State/UnionTerritory", y="Active", color="State/UnionTerritory",title="Top 10 states with most active cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-        elif inp2 == 2:
+        elif inp2 == "2":
             top_10_confirmed_states = Data.groupby("State/UnionTerritory").max()[['Confirmed']].sort_values(
                 by=["Confirmed"], ascending=False).reset_index()
             top_10_confirmed_states.drop(
@@ -91,21 +91,20 @@ while True:
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Bar charts")
             print("2-For Interactive Bar charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 plt.figure(figsize=(12, 6))
                 plt.title("Top 10 states with most Confirmed cases", size=20)
                 sns.barplot(x="State/UnionTerritory", y="Confirmed", data=top_10_confirmed_states[:10], linewidth=1,
                             edgecolor="black")
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.bar(top_10_confirmed_states[:10], x="State/UnionTerritory", y="Confirmed",
                              color="State/UnionTerritory", title="Top 10 states with most Confirmed cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-
-        elif inp2 == 3:
+        elif inp2 == "3":
             top_10_deaths_states = Data.groupby("State/UnionTerritory").max()[['Deaths']].sort_values(by=["Deaths"],
                                                                                                       ascending=False).reset_index()
             top_10_deaths_states.drop(
@@ -118,19 +117,19 @@ while True:
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Bar charts")
             print("2-For Interactive Bar charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 plt.figure(figsize=(12, 6))
                 plt.title("Top 10 states with most Deaths cases", size=20)
                 sns.barplot(x="State/UnionTerritory", y="Deaths", data=top_10_deaths_states[:10], linewidth=1,
                             edgecolor="black")
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.bar(top_10_deaths_states[:10], x="State/UnionTerritory", y="Deaths", color="State/UnionTerritory", title="Top 10 states with most Deaths cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-        elif inp2 == 4:
+        elif inp2 == "4":
             top_10_recovered_states = Data.groupby("State/UnionTerritory").max()[['Recovered']].sort_values(
                 by=["Recovered"], ascending=False).reset_index()
             top_10_recovered_states.drop(
@@ -143,14 +142,14 @@ while True:
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Bar charts")
             print("2-For Interactive Bar charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 plt.figure(figsize=(12, 6))
                 plt.title("Top 10 states with most Recovered cases", size=20)
                 sns.barplot(x="State/UnionTerritory", y="Recovered", data=top_10_recovered_states[:10], linewidth=1,
                             edgecolor="black")
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.bar(top_10_recovered_states[:10], x="State/UnionTerritory", y="Recovered",
                              color="State/UnionTerritory", title="Top 10 states with most Recovered cases")
                 fig.show()
@@ -158,18 +157,18 @@ while True:
                 print("---------!!!!!WRONG INPUT ------")
         else:
             print("---------!!!!!WRONG INPUT ------")
-    elif inp == 2:
+    elif inp == "2":
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
         print("   1 : India's trend for  ACTIVE cases ")
         print("   2 : India's trend for  RECOVERED cases ")
         print("   3 : India's trend for DEATHS cases ")
-        inp2 = int(input("\n Enter your option : "))
-        if inp2 == 1:
+        inp2 = input("\n Enter your option : ")
+        if inp2 == "1":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Graphs")
             print("2-For Interactive Graphs")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 plt.figure(figsize=(12, 6))
                 plt.title("Active cases trend in India ", size=20, color="darkblue")
                 plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
@@ -179,17 +178,17 @@ while True:
                 'lightyellow').get_title().set_fontsize('20')
                 plt.grid()
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.line(Per_day_data, x="Date", y="Active", title="Active cases trend India ")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-        elif inp2 == 2:
+        elif inp2 == "2":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Bar charts")
             print("2-For Interactive Bar charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 plt.figure(figsize=(12, 6))
                 plt.title("Recovered cases trend in India", size=20, color="darkblue")
                 plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
@@ -199,17 +198,17 @@ while True:
                 'lightyellow').get_title().set_fontsize('20')
                 plt.grid()
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.line(Per_day_data, x="Date", y="Recovered", title="Recovered cases trend India ")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-        elif inp2 == 3:
+        elif inp2 == "3":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Bar charts")
             print("2-For Interactive Bar charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 plt.figure(figsize=(12, 6))
                 plt.title("Deaths cases trend in India ", size=20, color="darkblue")
                 plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
@@ -219,25 +218,25 @@ while True:
                 'lightyellow').get_title().set_fontsize('20')
                 plt.grid()
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.line(Per_day_data, x="Date", y="Deaths", title="Deaths cases trend India ")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
         else:
             print("---------!!!!!WRONG INPUT ------")
-    elif inp == 3:
+    elif inp == "3":
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
         print("   1 : Top-5 States trend for  ACTIVE cases ")
         print("   2 : Top-5 States  trend for  RECOVERED cases ")
         print("   3 : Top-5 States  trend for DEATHS cases ")
-        inp2 = int(input("\n Enter your option : "))
-        if inp2 == 1:
+        inp2 = input("\n Enter your option : ")
+        if inp2 == "1":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Graphs")
             print("2-For Graphs")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 kerla_data = Data[Data["State/UnionTerritory"][:] == "Kerala"]
                 Maharashtra_data = Data[Data["State/UnionTerritory"][:] == "Maharashtra"]
                 Karnataka_data = Data[Data["State/UnionTerritory"][:] == "Karnataka"]
@@ -256,7 +255,7 @@ while True:
                 'lightyellow').get_title().set_fontsize('20')
                 plt.grid()
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 top_5_active = Data[
                     (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
@@ -265,12 +264,12 @@ while True:
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-        elif inp2 == 2:
+        elif inp2 == "2":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Graphs")
             print("2-For Interactive Graphs")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 kerla_data = Data[Data["State/UnionTerritory"][:] == "Kerala"]
                 Maharashtra_data = Data[Data["State/UnionTerritory"][:] == "Maharashtra"]
                 Karnataka_data = Data[Data["State/UnionTerritory"][:] == "Karnataka"]
@@ -289,7 +288,7 @@ while True:
                 'lightyellow').get_title().set_fontsize('20')
                 plt.grid()
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 top_5_recovered = Data[
                     (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
@@ -298,12 +297,12 @@ while True:
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-        elif inp2 == 3:
+        elif inp2 == "3":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Graphs")
             print("2-For Interactive Graphs")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 Delhi_data = Data[Data["State/UnionTerritory"][:] == "Delhi"]
                 Maharashtra_data = Data[Data["State/UnionTerritory"][:] == "Maharashtra"]
                 Karnataka_data = Data[Data["State/UnionTerritory"][:] == "Karnataka"]
@@ -322,7 +321,7 @@ while True:
                 'lightyellow').get_title().set_fontsize('20')
                 plt.grid()
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 top_5_deaths = Data[
                     (Data["State/UnionTerritory"] == "Delhi") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
@@ -333,13 +332,13 @@ while True:
                 print("---------!!!!!WRONG INPUT ------")
         else:
             print("---------!!!!!WRONG INPUT ------")
-    elif inp == 4:
+    elif inp == "4":
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
         print("   1 : Vaccination comparisons of different age groups ")
         print("   2 : Vaccination comparisons by gender ")
         print("   3 : Vaccination comparisons Between covishield and covaxin ")
-        inp2 = int(input("\n Enter your option : "))
-        if inp2 == 1:
+        inp2 = input("\n Enter your option : ")
+        if inp2 == "1":
             age_18_44 = vaccine_data["18-44 Years(Individuals Vaccinated)"].sum()
             age_45_60 = vaccine_data["45-60 Years(Individuals Vaccinated)"].sum()
             age_60_more = vaccine_data["60+ Years(Individuals Vaccinated)"].sum()
@@ -351,7 +350,7 @@ while True:
             plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
             plt.show()
 
-        elif inp2 == 2:
+        elif inp2 == "2":
             male = vaccine_data["Male(Individuals Vaccinated)"].sum()
             female = vaccine_data["Female(Individuals Vaccinated)"].sum()
             plt.figure(figsize=(12, 6))
@@ -362,7 +361,7 @@ while True:
             plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
             plt.show()
 
-        elif inp2 == 3:
+        elif inp2 == "3":
             Covaxin = vaccine_data[" Covaxin (Doses Administered)"].sum()
             CoviShield = vaccine_data["CoviShield (Doses Administered)"].sum()
             plt.figure(figsize=(12, 6))
@@ -375,17 +374,17 @@ while True:
 
         else:
             print("---------!!!!!WRONG INPUT ------")
-    elif inp == 5:
+    elif inp == "5":
         print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
         print("   1 : Vaccination comparisons of all States ")
         print("   2 : Vaccination comparisons of top-5 states  ")
-        inp2 = int(input("\n Enter your option : "))
-        if inp2 == 1:
+        inp2 = input("\n Enter your option : ")
+        if inp2 == "1":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Pie charts")
             print("2-For Pie  charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 Maharashtra = d1[d1["State"] == "Maharashtra"]["Total Individuals Vaccinated"].sum()
                 Uttar_Pradesh = d1[d1["State"] == "Uttar Pradesh"]["Total Individuals Vaccinated"].sum()
                 Rajasthan = d1[d1["State"] == "Rajasthan"]["Total Individuals Vaccinated"].sum()
@@ -402,7 +401,7 @@ while True:
                         autopct="%1.1f%%", textprops={"fontsize": 14})
                 plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 d2 = d1[:5]
                 other = d1[(d1["State"] != "Maharashtra") & (d1["State"] != "Rajasthan") & (d1["State"] != "Uttar Pradesh")
                            & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
@@ -414,7 +413,7 @@ while True:
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
-        elif inp2 == 2:
+        elif inp2 == "2":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal PIE charts")
             print("2-For Interactive PIE charts")
@@ -443,8 +442,8 @@ while True:
             print("---------!!!!!WRONG INPUT ------")
     else:
         print("---------!!!!!WRONG INPUT ------")
-    inp4 = input("Do you want to explore more type(y/n) : ")
-    if inp4 == 'n':
+    inp4 = input("if you want to explore more type(y) : ")
+    if inp4 != 'y':
         break
     os.system('cls')
 
