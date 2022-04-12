@@ -365,7 +365,7 @@ while True:
             Covaxin = vaccine_data[" Covaxin (Doses Administered)"].sum()
             CoviShield = vaccine_data["CoviShield (Doses Administered)"].sum()
             plt.figure(figsize=(12, 6))
-            plt.title("comarision of vaccination between male and female", size=20, color="darkblue")
+            plt.title("Vaccination comparisons Between covishield and covaxin ", size=20, color="darkblue")
             plt.pie(x=[Covaxin, CoviShield], labels=["Covaxin", "CoviShield"], shadow=True,
                     wedgeprops={'edgecolor': 'black', 'linewidth': 1}, colors=["lightgreen", "lightblue"],
                     explode=[0, 0.06], autopct="%1.1f%%")
@@ -417,8 +417,8 @@ while True:
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal PIE charts")
             print("2-For Interactive PIE charts")
-            inp3 = int(input("Enter your choice : "))
-            if inp3 == 1:
+            inp3 = input("Enter your choice : ")
+            if inp3 == "1":
                 Maharashtra = d1[d1["State"] == "Maharashtra"]["Total Individuals Vaccinated"].sum()
                 Uttar_Pradesh = d1[d1["State"] == "Uttar Pradesh"]["Total Individuals Vaccinated"].sum()
                 Rajasthan = d1[d1["State"] == "Rajasthan"]["Total Individuals Vaccinated"].sum()
@@ -432,7 +432,7 @@ while True:
                         autopct="%1.1f%%", textprops={"fontsize": 14}, startangle=-20)
                 plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
                 plt.show()
-            elif inp3 == 2:
+            elif inp3 == "2":
                 fig = px.pie(d1[:5], values="Total Individuals Vaccinated", names="State", title="Comarision of vaccination among top-5 states")
                 fig.show()
             else:
