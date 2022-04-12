@@ -1,12 +1,11 @@
 # ---------------------------------Importing all the libraries needed-------------------------
 
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-from datetime import datetime
 import seaborn as sns
 import plotly.express as px
 import os
+
 # ---------------------------------Reading the data from csv files with pandas-----------------
 
 Data = pd.read_csv("covid_19_india.csv")  # Main Data
@@ -39,8 +38,9 @@ for i in range(1, 560):
     Deaths.append(group_by_date["Deaths"][i] - group_by_date["Deaths"][i - 1])
 Per_day_data["Recovered"] = Recovered
 Per_day_data["Deaths"] = Deaths
-d1 = vaccine_data.groupby("State").sum()["Total Individuals Vaccinated"].reset_index().sort_values(by="Total Individuals Vaccinated",
-                                                                                                   ascending=False)
+d1 = vaccine_data.groupby("State").sum()["Total Individuals Vaccinated"].reset_index().sort_values(
+    by="Total Individuals Vaccinated",
+    ascending=False)
 d1 = d1[d1["State"] != "India"]
 # --------------------------------------Introduction Part-------------------------------
 while True:
@@ -74,7 +74,8 @@ while True:
                             edgecolor="black")
                 plt.show()
             elif inp3 == "2":
-                fig = px.bar(top_10_active_states[:10], x="State/UnionTerritory", y="Active", color="State/UnionTerritory",title="Top 10 states with most active cases")
+                fig = px.bar(top_10_active_states[:10], x="State/UnionTerritory", y="Active",
+                             color="State/UnionTerritory", title="Top 10 states with most active cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -82,7 +83,8 @@ while True:
             top_10_confirmed_states = Data.groupby("State/UnionTerritory").max()[['Confirmed']].sort_values(
                 by=["Confirmed"], ascending=False).reset_index()
             top_10_confirmed_states.drop(
-                index=top_10_confirmed_states[top_10_confirmed_states["State/UnionTerritory"] == "Maharashtra***"].index,
+                index=top_10_confirmed_states[
+                    top_10_confirmed_states["State/UnionTerritory"] == "Maharashtra***"].index,
                 inplace=True)
             top_10_confirmed_states.drop(
                 index=top_10_confirmed_states[top_10_confirmed_states["State/UnionTerritory"] == "Karanataka"].index,
@@ -125,7 +127,8 @@ while True:
                             edgecolor="black")
                 plt.show()
             elif inp3 == "2":
-                fig = px.bar(top_10_deaths_states[:10], x="State/UnionTerritory", y="Deaths", color="State/UnionTerritory", title="Top 10 states with most Deaths cases")
+                fig = px.bar(top_10_deaths_states[:10], x="State/UnionTerritory", y="Deaths",
+                             color="State/UnionTerritory", title="Top 10 states with most Deaths cases")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -133,7 +136,8 @@ while True:
             top_10_recovered_states = Data.groupby("State/UnionTerritory").max()[['Recovered']].sort_values(
                 by=["Recovered"], ascending=False).reset_index()
             top_10_recovered_states.drop(
-                index=top_10_recovered_states[top_10_recovered_states["State/UnionTerritory"] == "Maharashtra***"].index,
+                index=top_10_recovered_states[
+                    top_10_recovered_states["State/UnionTerritory"] == "Maharashtra***"].index,
                 inplace=True)
             top_10_recovered_states.drop(
                 index=top_10_recovered_states[top_10_recovered_states["State/UnionTerritory"] == "Karanataka"].index,
@@ -260,7 +264,8 @@ while True:
                     (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
                     (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Uttar Pradesh")]
-                fig = px.line(top_5_active, x="Date", y="Active", color="State/UnionTerritory", title="Active cases trend of top-5 State/UnionTerritory")
+                fig = px.line(top_5_active, x="Date", y="Active", color="State/UnionTerritory",
+                              title="Active cases trend of top-5 State/UnionTerritory")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -283,7 +288,8 @@ while True:
                 plt.plot(Maharashtra_data["Date"], Maharashtra_data["Recovered"], label="Maharashtra", linewidth=3)
                 plt.plot(Karnataka_data["Date"], Karnataka_data["Recovered"], label="Karnataka", linewidth=3)
                 plt.plot(TamilNadu_data["Date"], TamilNadu_data["Recovered"], label="TamilNadu", linewidth=3)
-                plt.plot(AndhraPradesh_data["Date"], AndhraPradesh_data["Recovered"], label="Andhra Pradesh", linewidth=3)
+                plt.plot(AndhraPradesh_data["Date"], AndhraPradesh_data["Recovered"], label="Andhra Pradesh",
+                         linewidth=3)
                 plt.legend(loc="upper left", title="State/UnionTerritory", fontsize=15, shadow=True, facecolor=
                 'lightyellow').get_title().set_fontsize('20')
                 plt.grid()
@@ -293,7 +299,8 @@ while True:
                     (Data["State/UnionTerritory"] == "Kerala") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
                     (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Andhra Pradesh")]
-                fig = px.line(top_5_recovered, x="Date", y="Recovered", color="State/UnionTerritory", title="Recovered cases trend of top-5 State/UnionTerritory")
+                fig = px.line(top_5_recovered, x="Date", y="Recovered", color="State/UnionTerritory",
+                              title="Recovered cases trend of top-5 State/UnionTerritory")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -326,7 +333,8 @@ while True:
                     (Data["State/UnionTerritory"] == "Delhi") | (Data["State/UnionTerritory"] == "Maharashtra") | (
                             Data["State/UnionTerritory"] == "Karnataka") |
                     (Data["State/UnionTerritory"] == "Tamil Nadu") | (Data["State/UnionTerritory"] == "Uttar Pradesh")]
-                fig = px.line(top_5_deaths, x="Date", y="Deaths", color="State/UnionTerritory", title="Deaths cases trend of top-5 State/UnionTerritory")
+                fig = px.line(top_5_deaths, x="Date", y="Deaths", color="State/UnionTerritory",
+                              title="Deaths cases trend of top-5 State/UnionTerritory")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -344,7 +352,8 @@ while True:
             age_60_more = vaccine_data["60+ Years(Individuals Vaccinated)"].sum()
             plt.figure(figsize=(12, 6))
             plt.title("Diiferent ages vaccination camparision", size=20, color="darkblue")
-            plt.pie(x=[age_18_44, age_45_60, age_60_more], labels=["age_18_44", "age_45_60", "age_60_more"], shadow=True,
+            plt.pie(x=[age_18_44, age_45_60, age_60_more], labels=["age_18_44", "age_45_60", "age_60_more"],
+                    shadow=True,
                     wedgeprops={'edgecolor': 'black', 'linewidth': 1}, colors=["lightgreen", "lightblue", "orange"],
                     explode=[0.033, 0.033, 0.033], autopct="%1.1f%%")
             plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
@@ -390,8 +399,9 @@ while True:
                 Rajasthan = d1[d1["State"] == "Rajasthan"]["Total Individuals Vaccinated"].sum()
                 Gujarat = d1[d1["State"] == "Gujarat"]["Total Individuals Vaccinated"].sum()
                 West_Bengal = d1[d1["State"] == "West Bengal"]["Total Individuals Vaccinated"].sum()
-                other = d1[(d1["State"] != "Maharashtra") & (d1["State"] != "Rajasthan") & (d1["State"] != "Uttar Pradesh")
-                           & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
+                other = \
+                d1[(d1["State"] != "Maharashtra") & (d1["State"] != "Rajasthan") & (d1["State"] != "Uttar Pradesh")
+                   & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
                     "Total Individuals Vaccinated"].sum()
                 plt.figure(figsize=(10, 10))
                 plt.title("Comarision of vaccination among all  different states", size=20, color="darkblue")
@@ -403,13 +413,15 @@ while True:
                 plt.show()
             elif inp3 == "2":
                 d2 = d1[:5]
-                other = d1[(d1["State"] != "Maharashtra") & (d1["State"] != "Rajasthan") & (d1["State"] != "Uttar Pradesh")
-                           & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
+                other = \
+                d1[(d1["State"] != "Maharashtra") & (d1["State"] != "Rajasthan") & (d1["State"] != "Uttar Pradesh")
+                   & (d1["State"] != "Gujarat") & (d1["State"] != "West Bengal")][
                     "Total Individuals Vaccinated"].sum()
                 value = {"State": "other", "Total Individuals Vaccinated": other}
                 d3 = pd.DataFrame(value, index=[0])
                 d2 = pd.concat([d2, d3], ignore_index=True)
-                fig = px.pie(d2[:6], values="Total Individuals Vaccinated", names="State", title="Comarision of vaccination among all different states")
+                fig = px.pie(d2[:6], values="Total Individuals Vaccinated", names="State",
+                             title="Comarision of vaccination among all different states")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -433,7 +445,8 @@ while True:
                 plt.legend(bbox_to_anchor=(1, 0.5), fontsize=15, shadow=True, facecolor='lightyellow')
                 plt.show()
             elif inp3 == "2":
-                fig = px.pie(d1[:5], values="Total Individuals Vaccinated", names="State", title="Comarision of vaccination among top-5 states")
+                fig = px.pie(d1[:5], values="Total Individuals Vaccinated", names="State",
+                             title="Comarision of vaccination among top-5 states")
                 fig.show()
             else:
                 print("---------!!!!!WRONG INPUT ------")
@@ -446,4 +459,3 @@ while True:
     if inp4 != 'y':
         break
     os.system('cls')
-
