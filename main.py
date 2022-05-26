@@ -1,9 +1,11 @@
 # ---------------------------------Importing all the libraries needed-------------------------
-
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 import os
 
 # ---------------------------------Reading the data from csv files with pandas-----------------
@@ -42,7 +44,7 @@ d1 = vaccine_data.groupby("State").sum()["Total Individuals Vaccinated"].reset_i
     by="Total Individuals Vaccinated",
     ascending=False)
 d1 = d1[d1["State"] != "India"]
-# --------------------------------------Introduction Part-------------------------------
+# --------------------------------------Analytical Part-------------------------------
 while True:
     print("-------------------    WELCOME TO COVID-19 ANALYTICAL AND DETAILS PREDICTION SYSTEM     -----------------\n")
     print("-----   YOU ARE INSIDE ANALYTICAL PART  ------\n")
@@ -238,7 +240,7 @@ while True:
         if inp2 == "1":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Graphs")
-            print("2-For Graphs")
+            print("2-For Interactive Graphs")
             inp3 = input("Enter your choice : ")
             if inp3 == "1":
                 kerla_data = Data[Data["State/UnionTerritory"][:] == "Kerala"]
@@ -391,7 +393,7 @@ while True:
         if inp2 == "1":
             print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
             print("1-For normal Pie charts")
-            print("2-For Pie  charts")
+            print("2-For Interactive Pie charts")
             inp3 = input("Enter your choice : ")
             if inp3 == "1":
                 Maharashtra = d1[d1["State"] == "Maharashtra"]["Total Individuals Vaccinated"].sum()
@@ -459,3 +461,191 @@ while True:
     if inp4 != 'y':
         break
     os.system('cls')
+os.system('cls')
+# --------------------------------------prediction Part------------------------------------------------------------------
+while True:
+    print("-----   YOU ARE INSIDE PREDICTION PART  ------\n")
+    print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
+    print("   1 : Plotting India's covid-19 per day cases predictions")
+    print("   2 : Plotting India's covid-19 overall cases predictions")
+    inp = input(" Enter your option : ")
+    if inp == "1":
+        print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
+        print("   1 : Plotting India's covid-19 per day Active cases predictions")
+        print("   2 : Plotting India's covid-19 per day Deaths cases predictions ")
+        print("   3 : Plotting India's covid-19 per day Recovered cases predictions ")
+        inp2 = input("\n Enter your option : ")
+        if inp2 == "1":
+            DS1=pd.DataFrame({"int_date":[i for i in range(560)]})
+            DS1["Active"]=Per_day_data["Active"]
+            X = DS1.iloc[:, 0:1].values
+            y = DS1.iloc[:, 1].values
+            # Fitting Polynomial Regression to the dataset
+            poly = PolynomialFeatures(degree = 8)
+            X_poly = poly.fit_transform(X)
+            
+            poly.fit(X_poly, y)
+            lin2 = LinearRegression()
+            lin2.fit(X_poly, y)
+            # Visualising the Polynomial Regression results
+            W={"int_dates":[i for i in range(590)]}
+            Df = pd.DataFrame(W)
+            w = Df.iloc[:, 0:].values
+            plt.figure(figsize=(12, 6))
+            plt.title("India's covid-19 per day Active cases predictions ", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Active cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(X, y, color = 'blue', linewidth=3, label="Actual line")
+            plt.plot(w, lin2.predict(poly.fit_transform(w)), color = 'Green',linewidth=3, label="Prediction line")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+                            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
+        elif inp2 == "2":
+            DS2=pd.DataFrame({"int_date":[i for i in range(560)]})
+            DS2["Deaths"]=Per_day_data["Deaths"]
+            X = DS2.iloc[:, 0:1].values
+            y = DS2.iloc[:, 1].values
+            # Fitting Polynomial Regression to the dataset
+            poly = PolynomialFeatures(degree = 9)
+            X_poly = poly.fit_transform(X)
+            poly.fit(X_poly, y)
+            lin2 = LinearRegression()
+            lin2.fit(X_poly, y)
+            # Visualising the Polynomial Regression results
+            W={"int_dates":[i for i in range(580)]}
+            Df = pd.DataFrame(W)
+            w = Df.iloc[:, 0:].values
+            plt.figure(figsize=(12, 6))
+            plt.title("India's covid-19 per day Deaths cases predictions ", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Deaths cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(X, y, color = 'blue', linewidth=3, label="Actual line")
+            plt.plot(w, lin2.predict(poly.fit_transform(w)), color = 'Green',linewidth=3, label="Prediction line")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+                            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
+            
+        elif inp2 == "3":
+            DS3=pd.DataFrame({"int_date":[i for i in range(560)]})
+            DS3["Recovered"]=Per_day_data["Recovered"]
+            X = DS3.iloc[:, 0:1].values
+            y = DS3.iloc[:, 1].values
+            # Fitting Polynomial Regression to the dataset
+            poly = PolynomialFeatures(degree = 9)
+            X_poly = poly.fit_transform(X)
+            poly.fit(X_poly, y)
+            lin2 = LinearRegression()
+            lin2.fit(X_poly, y)
+            # Visualising the Polynomial Regression results
+            W={"int_dates":[i for i in range(580)]}
+            Df = pd.DataFrame(W)
+            w = Df.iloc[:, 0:].values
+            plt.figure(figsize=(12, 6))
+            plt.title("India's covid-19 per day Recovered cases predictions ", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Recovered cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(X, y, color = 'blue', linewidth=3, label="Actual line")
+            plt.plot(w, lin2.predict(poly.fit_transform(w)), color = 'Green',linewidth=3, label="Prediction line")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+                            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
+
+        else:
+            print("---------!!!!!WRONG INPUT ------")
+       
+    elif inp == "2":
+        print("PLEASE SELECT 1 OPTION FROM GIVEN OPTIONS")
+        print("   1 : Plotting India's covid-19 Overall Recovered  cases predictions")
+        print("   2 : Plotting India's covid-19 Overall Deaths cases predictions ")
+        print("   3 : Plotting India's covid-19 Overall Confirmed cases predictions ")
+        inp2 = input("\n Enter your option : ")
+        if inp2 == "1":
+            DS4=pd.DataFrame({"int_date":[i for i in range(560)]})
+            DS4["Recovered"]=group_by_date["Recovered"]
+            X = DS4.iloc[:, 0:1].values
+            y = DS4.iloc[:, 1].values
+            # Fitting Polynomial Regression to the dataset
+            poly = PolynomialFeatures(degree = 5)
+            X_poly = poly.fit_transform(X)
+            
+            poly.fit(X_poly, y)
+            lin2 = LinearRegression()
+            lin2.fit(X_poly, y)
+            # Visualising the Polynomial Regression results
+            W={"int_dates":[i for i in range(580)]}
+            Df = pd.DataFrame(W)
+            w = Df.iloc[:, 0:].values
+            plt.figure(figsize=(12, 6))
+            plt.title("India's covid-19 overall Recovered cases predictions ", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Recovered cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(X, y, color = 'blue', linewidth=3, label="Actual line")
+            plt.plot(w, lin2.predict(poly.fit_transform(w)), color = 'Green',linewidth=3, label="Prediction line")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+                            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
+        elif inp2 == "2":
+            DS5=pd.DataFrame({"int_date":[i for i in range(560)]})
+            DS5["Deaths"]=group_by_date["Deaths"]
+            X = DS5.iloc[:, 0:1].values
+            y = DS5.iloc[:, 1].values
+            # Fitting Polynomial Regression to the dataset
+            poly = PolynomialFeatures(degree = 5)
+            X_poly = poly.fit_transform(X)
+            
+            poly.fit(X_poly, y)
+            lin2 = LinearRegression()
+            lin2.fit(X_poly, y)
+            # Visualising the Polynomial Regression results
+            W={"int_dates":[i for i in range(580)]}
+            Df = pd.DataFrame(W)
+            w = Df.iloc[:, 0:].values
+            plt.figure(figsize=(12, 6))
+            plt.title("India's covid-19 overall Deaths cases predictions ", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Deaths cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(X, y, color = 'blue', linewidth=3, label="Actual line")
+            plt.plot(w, lin2.predict(poly.fit_transform(w)), color = 'Green',linewidth=3, label="Prediction line")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+                            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
+        elif inp2 == "3":
+            DS6=pd.DataFrame({"int_date":[i for i in range(560)]})
+            DS6["Confirmed"]=group_by_date["Confirmed"]
+            X = DS6.iloc[:, 0:1].values
+            y = DS6.iloc[:, 1].values
+            # Fitting Polynomial Regression to the dataset
+            poly = PolynomialFeatures(degree = 5)
+            X_poly = poly.fit_transform(X)
+            
+            poly.fit(X_poly, y)
+            lin2 = LinearRegression()
+            lin2.fit(X_poly, y)
+            # Visualising the Polynomial Regression results
+            W={"int_dates":[i for i in range(580)]}
+            Df = pd.DataFrame(W)
+            w = Df.iloc[:, 0:].values
+            plt.figure(figsize=(12, 6))
+            plt.title("India's covid-19 overall Confirmed cases predictions ", size=20, color="darkblue")
+            plt.xlabel("Dates", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.ylabel("Confirmed cases", fontdict={'family': 'serif', 'color': 'darkred', 'size': 15})
+            plt.plot(X, y, color = 'blue', linewidth=3, label="Actual line")
+            plt.plot(w, lin2.predict(poly.fit_transform(w)), color = 'Green',linewidth=3, label="Prediction line")
+            plt.legend(loc="upper left", title="Country", fontsize=15, shadow=True, facecolor=
+                            'lightyellow').get_title().set_fontsize('20')
+            plt.grid()
+            plt.show()
+        else:
+            print("---------!!!!!WRONG INPUT ------")
+    else:
+        print("---------!!!!!WRONG INPUT ------")
+    inp4 = input("if you want to explore more type(y) : ")
+    if inp4 != 'y':
+        break
+    os.system('cls')
+
