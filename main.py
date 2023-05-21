@@ -552,7 +552,6 @@ while True:
                             'lightyellow').get_title().set_fontsize('20')
             plt.grid()
             plt.show()
-
         else:
             print("---------!!!!!WRONG INPUT ------")
        
